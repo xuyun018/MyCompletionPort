@@ -1278,7 +1278,7 @@ BOOL XYTCPDisconnect(PXYTRANSPORT pt, PXYLISTENER pl, PXYTCP_NODE ptn, SOCKET s,
 		if ((ptn->flags&XYTRANSPORT_FLAG_SHUTDOWN0) != 0)
 		{
 			// 此逻辑如果成功，则代码设计有问题
-#ifdef FIND_TROJAN_BUG
+#ifdef FIND_BUG
 			OutputDebugValue(_T("SHUTDOWN 1"), (int)ptn);
 			//MessageBox(NULL, _T("SHUTDOWN 1"), _T("Error"), MB_OK);
 #endif
@@ -1350,7 +1350,7 @@ BOOL XYTCPDisconnect(PXYTRANSPORT pt, PXYLISTENER pl, PXYTCP_NODE ptn, SOCKET s,
 					//ptn = NULL;
 				}
 			}
-#ifdef FIND_TROJAN_BUG
+#ifdef FIND_BUG
 			else
 			{
 				OutputDebugString(_T("申请Overlapped失败 DisconnectEx"));
@@ -1360,7 +1360,7 @@ BOOL XYTCPDisconnect(PXYTRANSPORT pt, PXYLISTENER pl, PXYTCP_NODE ptn, SOCKET s,
 		else
 		{
 			result = TRUE;
-#ifdef FIND_TROJAN_BUG
+#ifdef FIND_BUG
 			// 到达这里很正常
 			OutputDebugValue(_T("Error ptn-------------------"), (int)ptn->head0);
 #endif
@@ -1631,7 +1631,7 @@ BOOL XYTCPPushReceive(PXYTRANSPORT pt, PXYTCP_NODE ptn, SOCKET s)
 	}
 	else
 	{
-#ifdef FIND_TROJAN_BUG
+#ifdef FIND_BUG
 		OutputDebugString(_T("申请Node失败 PushReceive"));
 #endif
 	}
@@ -2078,7 +2078,7 @@ BOOL XYTCPPushAccept(PXYTRANSPORT pt, PXYLISTENER pl)
 			InterlockedDecrement(&pt->temp0);
 		}
 	}
-#ifdef FIND_TROJAN_BUG
+#ifdef FIND_BUG
 	else
 	{
 		OutputDebugString(_T("申请Node失败 AcceptEx"));
@@ -2174,7 +2174,7 @@ VOID XYTCPAchieved(PXYTRANSPORT pt, PXYLISTENER pl, PXYTCP_OVERLAPPED pto, PXYTC
 
 	if (!flag)
 	{
-#ifdef FIND_TROJAN_BUG
+#ifdef FIND_BUG
 #endif
 
 		if (!XYTCPDisconnect(pt, pl, ptn, s, type))
@@ -2399,7 +2399,7 @@ DWORD WINAPI XYTransportWorkProc(LPVOID parameter)
 		}
 		else
 		{
-#ifdef FIND_TROJAN_BUG
+#ifdef FIND_BUG
 			OutputDebugValue(_T("get quit message"), GetCurrentThreadId(), flag);
 #endif
 
@@ -2407,7 +2407,7 @@ DWORD WINAPI XYTransportWorkProc(LPVOID parameter)
 		}
 	}
 
-#ifdef FIND_TROJAN_BUG
+#ifdef FIND_BUG
 	OutputDebugValue(_T("quit thread"), GetCurrentThreadId());
 #endif
 
@@ -2634,7 +2634,7 @@ BOOL XYTCPConnect(PXYTRANSPORT pt, LPVOID customdata, const CHAR *host, USHORT p
 					LeaveCriticalSection(&pt->cs4);
 				}
 			}
-#ifdef FIND_TROJAN_BUG
+#ifdef FIND_BUG
 			else
 			{
 				OutputDebugString(_T("申请Overlapped失败 ConnectEx"));
@@ -2651,7 +2651,7 @@ BOOL XYTCPConnect(PXYTRANSPORT pt, LPVOID customdata, const CHAR *host, USHORT p
 			InterlockedDecrement(&pt->temp0);
 		}
 	}
-#ifdef FIND_TROJAN_BUG
+#ifdef FIND_BUG
 	else
 	{
 		OutputDebugString(_T("申请Node失败 ConnectEx"));
